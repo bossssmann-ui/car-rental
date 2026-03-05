@@ -31,22 +31,17 @@ src/
 | О компании   | `/about`     | История, команда, ценности                  |
 | Контакты     | `/contacts`  | Офисы, форма, карта                         |
 
-## Эскизы страниц
+## Демо
 
-### Главная (`/`)
-![Главная страница](https://github.com/user-attachments/assets/261fb99e-653b-4cb6-a80c-47ed2a911eea)
+👉 **[Открыть сайт](https://bossssmann-ui.github.io/car-rental/)** — живая версия на GitHub Pages
 
-### Каталог автомобилей (`/cars`)
-![Каталог автомобилей](https://github.com/user-attachments/assets/f16a1000-6000-4354-b6df-29513c73b4d6)
-
-### Бронирование (`/booking`)
-![Бронирование](https://github.com/user-attachments/assets/28e00a1f-3955-4c27-b63f-994d6ad6c868)
-
-### О компании (`/about`)
-![О компании](https://github.com/user-attachments/assets/92c6cf2b-5a10-4d37-bf67-48576438f9e5)
-
-### Контакты (`/contacts`)
-![Контакты](https://github.com/user-attachments/assets/63062a63-80d7-464f-95af-847a2e0cc249)
+| Страница     | Прямая ссылка                                                           |
+|--------------|-------------------------------------------------------------------------|
+| Главная      | [/](https://bossssmann-ui.github.io/car-rental/)                       |
+| Каталог      | [/cars](https://bossssmann-ui.github.io/car-rental/cars)               |
+| Бронирование | [/booking](https://bossssmann-ui.github.io/car-rental/booking)         |
+| О компании   | [/about](https://bossssmann-ui.github.io/car-rental/about)             |
+| Контакты     | [/contacts](https://bossssmann-ui.github.io/car-rental/contacts)       |
 
 ## Запуск
 
