@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Calendar, MapPin, Search } from 'lucide-react';
+import { todayISO, tomorrowISO } from '../utils/dates';
 
 const locations = [
   'Центр города (ул. Светланская, 82)',
@@ -11,8 +12,8 @@ const locations = [
 
 export default function QuickBookingForm() {
   const navigate = useNavigate();
-  const today = new Date().toISOString().split('T')[0];
-  const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+  const today = todayISO();
+  const tomorrow = tomorrowISO();
 
   const [form, setForm] = useState({
     location: locations[0],

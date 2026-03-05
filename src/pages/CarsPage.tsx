@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Filter, X, ChevronDown } from 'lucide-react';
 import CarCard from '../components/CarCard';
@@ -23,19 +23,17 @@ const sortOptions = [
 
 export default function CarsPage() {
   const [searchParams] = useSearchParams();
-  const initialCategory = (searchParams.get('category') as Car['category']) || 'all';
+  // Derive category from URL param; local state overrides when user clicks tabs
+  const urlCategory = (searchParams.get('category') as Car['category']) || 'all';
 
-  const [category, setCategory] = useState<Car['category'] | 'all'>(initialCategory);
+  const [categoryOverride, setCategoryOverride] = useState<Car['category'] | 'all' | null>(null);
+  const category = categoryOverride ?? urlCategory;
+
   const [transmission, setTransmission] = useState<Car['transmission'] | 'all'>('all');
   const [maxPrice, setMaxPrice] = useState<number>(10000);
   const [sortBy, setSortBy] = useState('price-asc');
   const [showFilters, setShowFilters] = useState(false);
   const [availableOnly, setAvailableOnly] = useState(false);
-
-  useEffect(() => {
-    const cat = searchParams.get('category') as Car['category'];
-    if (cat) setCategory(cat);
-  }, [searchParams]);
 
   const filtered = cars
     .filter((c) => category === 'all' || c.category === category)
@@ -53,7 +51,7 @@ export default function CarsPage() {
     });
 
   const clearFilters = () => {
-    setCategory('all');
+    setCategoryOverride('all');
     setTransmission('all');
     setMaxPrice(10000);
     setAvailableOnly(false);
@@ -80,7 +78,7 @@ export default function CarsPage() {
               <button
                 key={cat.value}
                 className={`cats-btn${category === cat.value ? ' cats-btn--active' : ''}`}
-                onClick={() => setCategory(cat.value as Car['category'] | 'all')}
+                onClick={() => setCategoryOverride(cat.value as Car['category'] | 'all')}
               >
                 {cat.label}
               </button>

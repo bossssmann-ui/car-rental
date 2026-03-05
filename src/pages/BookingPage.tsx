@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { CheckCircle, Calendar, MapPin, User, Phone, Mail, Car as CarIcon } from 'lucide-react';
 import { cars } from '../data/cars';
 import type { Car } from '../types';
+import { todayISO, tomorrowISO, calcRentalDays } from '../utils/dates';
 
 const locations = [
   'Центр города (ул. Светланская, 82)',
@@ -15,10 +16,9 @@ export default function BookingPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const carId = searchParams.get('car');
-  const today = new Date().toISOString().split('T')[0];
-  const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+  const today = todayISO();
+  const tomorrow = tomorrowISO();
 
-  const [selectedCar, setSelectedCar] = useState<Car | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
     carId: carId || '',
@@ -32,20 +32,13 @@ export default function BookingPage() {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  useEffect(() => {
-    if (form.carId) {
-      const car = cars.find((c) => c.id === Number(form.carId));
-      setSelectedCar(car || null);
-    } else {
-      setSelectedCar(null);
-    }
-  }, [form.carId]);
+  // Derive selected car from form.carId without a side-effect
+  const selectedCar: Car | null = useMemo(
+    () => (form.carId ? (cars.find((c) => c.id === Number(form.carId)) ?? null) : null),
+    [form.carId],
+  );
 
-  const getDays = () => {
-    if (!form.pickupDate || !form.returnDate) return 1;
-    const diff = new Date(form.returnDate).getTime() - new Date(form.pickupDate).getTime();
-    return Math.max(1, Math.ceil(diff / 86400000));
-  };
+  const days = calcRentalDays(form.pickupDate, form.returnDate);
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
@@ -74,7 +67,6 @@ export default function BookingPage() {
     }
   };
 
-  const days = getDays();
   const totalPrice = selectedCar ? selectedCar.pricePerDay * days : 0;
 
   if (submitted) {
