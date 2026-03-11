@@ -31,6 +31,18 @@ src/
 | О компании   | `/about`     | История, команда, ценности                  |
 | Контакты     | `/contacts`  | Офисы, форма, карта                         |
 
+## Демо
+
+👉 **[Открыть сайт](https://bossssmann-ui.github.io/car-rental/)** — живая версия на GitHub Pages
+
+| Страница     | Прямая ссылка                                                           |
+|--------------|-------------------------------------------------------------------------|
+| Главная      | [/](https://bossssmann-ui.github.io/car-rental/)                       |
+| Каталог      | [/cars](https://bossssmann-ui.github.io/car-rental/cars)               |
+| Бронирование | [/booking](https://bossssmann-ui.github.io/car-rental/booking)         |
+| О компании   | [/about](https://bossssmann-ui.github.io/car-rental/about)             |
+| Контакты     | [/contacts](https://bossssmann-ui.github.io/car-rental/contacts)       |
+
 ## Запуск
 
 ```bash
