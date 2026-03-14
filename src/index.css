@@ -1587,7 +1587,7 @@ button, input, select, textarea {
 }
 .messenger-btn:hover { opacity: 0.85; }
 .messenger-btn--whatsapp { background: #25D366; }
-.messenger-btn--telegram { background: #0088cc; }
+.messenger-btn--phone { background: #0088cc; }
 
 .contacts-form {
   display: flex;

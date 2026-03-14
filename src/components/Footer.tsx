@@ -81,7 +81,7 @@ export default function Footer() {
               </div>
               <div className="footer__contact">
                 <Clock size={16} />
-                Пн–Пт: 09:30–19:00 · Сб–Вс: 10:30–19:00
+                Пн–Пт: 09:30–19:00 | Сб–Вс: 10:30–19:00
               </div>
             </div>
           </div>

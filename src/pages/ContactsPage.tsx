@@ -115,7 +115,7 @@ export default function ContactsPage() {
                   >
                     WhatsApp
                   </a>
-                  <a href="tel:+74232014800" className="messenger-btn messenger-btn--telegram">
+                  <a href="tel:+74232014800" className="messenger-btn messenger-btn--phone">
                     Позвонить
                   </a>
                 </div>
