@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Clock, Car, Instagram, Send } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Car, Globe, MessageCircle } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -12,27 +12,28 @@ export default function Footer() {
               <span>Меридиан<span className="footer__logo-accent">VL</span></span>
             </Link>
             <p className="footer__desc">
-              Автопрокат во Владивостоке. Более 8 лет на рынке. Широкий выбор автомобилей,
-              прозрачные цены, качественный сервис.
+              MeridianVL — аренда автомобилей во Владивостоке для города, аэропорта и
+              путешествий по Приморью. Прозрачные условия, оперативная подача авто,
+              онлайн-бронирование и решения для туристов и бизнеса.
             </p>
             <div className="footer__social">
               <a
-                href="https://instagram.com"
+                href="https://meridianvl.pro/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer__social-link"
-                aria-label="Instagram"
+                aria-label="Сайт MeridianVL"
               >
-                <Instagram size={20} />
+                <Globe size={20} />
               </a>
               <a
-                href="https://t.me/meridianvl"
+                href="https://wa.me/79247314800"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer__social-link"
-                aria-label="Telegram"
+                aria-label="WhatsApp MeridianVL"
               >
-                <Send size={20} />
+                <MessageCircle size={20} />
               </a>
             </div>
           </div>
@@ -41,8 +42,8 @@ export default function Footer() {
             <h3 className="footer__heading">Навигация</h3>
             <nav className="footer__nav">
               <Link to="/" className="footer__nav-link">Главная</Link>
-              <Link to="/cars" className="footer__nav-link">Автомобили</Link>
-              <Link to="/about" className="footer__nav-link">О компании</Link>
+              <Link to="/cars" className="footer__nav-link">Прокат авто</Link>
+              <Link to="/about" className="footer__nav-link">О сервисе</Link>
               <Link to="/contacts" className="footer__nav-link">Контакты</Link>
               <Link to="/booking" className="footer__nav-link">Бронирование</Link>
             </nav>
@@ -51,24 +52,24 @@ export default function Footer() {
           <div className="footer__col">
             <h3 className="footer__heading">Категории авто</h3>
             <nav className="footer__nav">
-              <Link to="/cars?category=economy" className="footer__nav-link">Эконом</Link>
-              <Link to="/cars?category=comfort" className="footer__nav-link">Комфорт</Link>
-              <Link to="/cars?category=business" className="footer__nav-link">Бизнес</Link>
-              <Link to="/cars?category=suv" className="footer__nav-link">Внедорожники</Link>
-              <Link to="/cars?category=minivan" className="footer__nav-link">Минивэны</Link>
+              <Link to="/cars?category=economy" className="footer__nav-link">Эконом для города</Link>
+              <Link to="/cars?category=comfort" className="footer__nav-link">Комфорт для поездок</Link>
+              <Link to="/cars?category=business" className="footer__nav-link">Бизнес-класс</Link>
+              <Link to="/cars?category=suv" className="footer__nav-link">Кроссоверы и SUV</Link>
+              <Link to="/cars?category=minivan" className="footer__nav-link">Минивэны для групп</Link>
             </nav>
           </div>
 
           <div className="footer__col">
             <h3 className="footer__heading">Контакты</h3>
             <div className="footer__contacts">
-              <a href="tel:+74232000000" className="footer__contact">
+              <a href="tel:+79247314800" className="footer__contact">
                 <Phone size={16} />
-                +7 (423) 200-00-00
+                +7 (924) 731-48-00
               </a>
-              <a href="tel:+79147000000" className="footer__contact">
+              <a href="tel:+74232014800" className="footer__contact">
                 <Phone size={16} />
-                +7 (914) 700-00-00
+                +7 (4232) 01-48-00
               </a>
               <a href="mailto:info@meridianvl.pro" className="footer__contact">
                 <Mail size={16} />
@@ -76,11 +77,11 @@ export default function Footer() {
               </a>
               <div className="footer__contact">
                 <MapPin size={16} />
-                Владивосток, ул. Светланская, 82
+                Владивосток, ул. Очаковская, 5 стр. 2, оф. 414
               </div>
               <div className="footer__contact">
                 <Clock size={16} />
-                Пн–Вс: 08:00 – 22:00
+                Пн–Пт: 09:30–19:00 · Сб–Вс: 10:30–19:00
               </div>
             </div>
           </div>

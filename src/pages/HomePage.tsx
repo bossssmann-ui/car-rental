@@ -3,53 +3,60 @@ import { Shield, Clock, MapPin, ThumbsUp, Award, Headphones, ChevronRight, Check
 import QuickBookingForm from '../components/QuickBookingForm';
 import CarCard from '../components/CarCard';
 import ReviewCard from '../components/ReviewCard';
+import Seo from '../components/Seo';
 import { cars, reviews } from '../data/cars';
 
 const benefits = [
   {
     icon: Shield,
-    title: 'Надёжность',
-    desc: 'Все автомобили застрахованы, проходят регулярное ТО. Ваша безопасность — наш приоритет.',
+    title: 'Исправные и подготовленные автомобили',
+    desc: 'Каждый автомобиль проверяется перед выдачей, чтобы аренда авто во Владивостоке была безопасной и предсказуемой.',
   },
   {
     icon: Clock,
-    title: 'Работаем 24/7',
-    desc: 'Принимаем заявки круглосуточно. Выдача и возврат авто в удобное для вас время.',
+    title: 'Быстрое подтверждение брони',
+    desc: 'Онлайн-заявка помогает заранее подготовить договор и сократить время получения автомобиля.',
   },
   {
     icon: MapPin,
-    title: 'Удобное расположение',
-    desc: 'Офисы у аэропорта, вокзала и в центре города. Доставка авто по всему Владивостоку.',
+    title: 'Выдача в городе и в аэропорту',
+    desc: 'Можно получить машину в офисе MeridianVL, согласовать подачу в аэропорт Владивостока или доставку по городу.',
   },
   {
     icon: ThumbsUp,
-    title: 'Прозрачные цены',
-    desc: 'Никаких скрытых платежей. Цена фиксирована — вы платите ровно столько, сколько указано.',
+    title: 'Прозрачные условия аренды',
+    desc: 'Чёткая стоимость, понятный депозит и сопровождение менеджера без лишних скрытых платежей.',
   },
   {
     icon: Award,
-    title: '8 лет на рынке',
-    desc: 'Работаем с 2016 года. Более 5 000 довольных клиентов и 500+ успешных поездок в месяц.',
+    title: 'Авто для туризма и бизнеса',
+    desc: 'В каталоге есть машины для деловых поездок, семейных маршрутов, трансферов и путешествий по Приморью.',
   },
   {
     icon: Headphones,
-    title: 'Поддержка в пути',
-    desc: 'Наш менеджер всегда на связи. Поможем с любым вопросом во время аренды.',
+    title: 'Сервис с акцентом на клиента',
+    desc: 'Менеджеры помогают подобрать формат аренды под маршрут, багаж, пассажиров и формат вашей поездки.',
   },
 ];
 
 const steps = [
-  { num: '01', title: 'Выберите автомобиль', desc: 'Выберите авто из каталога по категории, цене и характеристикам' },
-  { num: '02', title: 'Оформите бронь', desc: 'Заполните форму онлайн или позвоните нам — займёт 3 минуты' },
-  { num: '03', title: 'Получите автомобиль', desc: 'Приезжайте в удобный офис или мы доставим авто к вам' },
-  { num: '04', title: 'Наслаждайтесь поездкой', desc: 'Путешествуйте с комфортом. Мы всегда на связи!' },
+  { num: '01', title: 'Выберите класс авто', desc: 'Сравните эконом, комфорт, кроссоверы, бизнес-седаны и минивэны по цене и задачам поездки.' },
+  { num: '02', title: 'Оставьте заявку', desc: 'Заполните онлайн-форму на сайте или свяжитесь с менеджером по телефону для быстрого подтверждения.' },
+  { num: '03', title: 'Согласуйте выдачу', desc: 'Выберите офис на Очаковской, подачу в аэропорт Владивостока или удобную доставку по городу.' },
+  { num: '04', title: 'Отправляйтесь в маршрут', desc: 'Используйте автомобиль для города, командировки, отдыха у моря и авто-туризма по Приморскому краю.' },
 ];
 
 const stats = [
-  { value: '8+', label: 'лет работы' },
-  { value: '50+', label: 'автомобилей' },
-  { value: '5000+', label: 'клиентов' },
-  { value: '4.8', label: 'средний рейтинг' },
+  { value: 'Эконом → бизнес', label: 'категории автомобилей в каталоге' },
+  { value: 'Аэропорт', label: 'подача и возврат по договорённости' },
+  { value: 'Онлайн', label: 'заявка на аренду за несколько минут' },
+  { value: 'Приморье', label: 'авто для туризма, города и трассы' },
+];
+
+const heroHighlights = [
+  'Аренда авто во Владивостоке с подачей в аэропорт',
+  'Автомобили для туристов, командировок и семейных маршрутов',
+  'Прозрачные условия проката и быстрое подтверждение заявки',
 ];
 
 export default function HomePage() {
@@ -57,38 +64,63 @@ export default function HomePage() {
   const featuredReviews = reviews.slice(0, 3);
 
   return (
-    <main>
+    <>
+      <Seo
+        title="MeridianVL — аренда авто во Владивостоке, прокат автомобилей и авто-туризм"
+        description="MeridianVL — автопрокат во Владивостоке с выдачей в городе и аэропорту. Аренда авто для туристов, бизнеса и поездок по Приморью: эконом, кроссоверы, бизнес-класс и минивэны."
+        keywords="аренда авто владивосток, автопрокат владивосток, прокат автомобилей владивосток, аренда авто аэропорт владивосток, авто туризм приморье, meridianvl"
+        path="/"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'AutoRental',
+          name: 'MeridianVL',
+          description: 'Прокат автомобилей во Владивостоке для города, аэропорта и путешествий по Приморью.',
+          url: 'https://meridianvl.pro/',
+          telephone: '+7-924-731-48-00',
+          areaServed: ['Владивосток', 'Аэропорт Владивосток (Кневичи)', 'Приморский край'],
+        }}
+      />
+      <main>
       {/* Hero */}
       <section className="hero">
         <div className="hero__bg" aria-hidden="true">
           <div className="hero__bg-overlay" />
         </div>
         <div className="container">
-          <div className="hero__content">
-            <div className="hero__badge">
-              <CheckCircle size={16} />
-              Лучший автопрокат Владивостока
+            <div className="hero__content">
+              <div className="hero__badge">
+                <CheckCircle size={16} />
+                Прокат автомобилей во Владивостоке и в аэропорту
+              </div>
+              <h1 className="hero__title">
+                Аренда авто для города,<br />
+                <span className="hero__title-accent">аэропорта и путешествий по Приморью</span>
+              </h1>
+              <p className="hero__subtitle">
+                MeridianVL помогает быстро арендовать автомобиль во Владивостоке:
+                от эконом-класса до минивэнов и SUV. Удобно для туристов, деловых поездок,
+                трансферов и самостоятельных маршрутов по Приморскому краю.
+              </p>
+              <div className="hero__highlights">
+                {heroHighlights.map((item) => (
+                  <div key={item} className="hero__highlight">
+                    <CheckCircle size={16} />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="hero__actions">
+                <Link to="/cars" className="btn btn--primary btn--lg">
+                  Выбрать автомобиль
+                  <ChevronRight size={20} />
+                </Link>
+                <a href="tel:+79247314800" className="btn btn--outline-white btn--lg">
+                  Позвонить менеджеру
+                </a>
+              </div>
             </div>
-            <h1 className="hero__title">
-              Аренда автомобилей<br />
-              <span className="hero__title-accent">во Владивостоке</span>
-            </h1>
-            <p className="hero__subtitle">
-              Широкий выбор авто, прозрачные цены, круглосуточная поддержка.
-              Без скрытых платежей и лишних формальностей.
-            </p>
-            <div className="hero__actions">
-              <Link to="/cars" className="btn btn--primary btn--lg">
-                Смотреть автомобили
-                <ChevronRight size={20} />
-              </Link>
-              <a href="tel:+74232000000" className="btn btn--outline-white btn--lg">
-                Позвонить нам
-              </a>
-            </div>
-          </div>
           <div className="hero__booking">
-            <div className="hero__booking-title">Быстрый поиск</div>
+            <div className="hero__booking-title">Онлайн-заявка на аренду</div>
             <QuickBookingForm />
           </div>
         </div>
@@ -113,10 +145,10 @@ export default function HomePage() {
         <div className="container">
           <div className="section__header">
             <div className="section__tag">Наш автопарк</div>
-            <h2 className="section__title">Популярные автомобили</h2>
+            <h2 className="section__title">Популярные автомобили для аренды</h2>
             <p className="section__desc">
-              Выберите автомобиль, который подходит именно вам.
-              От эконом-класса до люксовых внедорожников.
+              Подберите авто под городской маршрут, поездку в аэропорт, трансфер,
+              командировку или путешествие по побережью Приморья.
             </p>
           </div>
           <div className="cars-grid">
@@ -138,9 +170,10 @@ export default function HomePage() {
         <div className="container">
           <div className="section__header">
             <div className="section__tag">Наши преимущества</div>
-            <h2 className="section__title">Почему выбирают нас</h2>
+            <h2 className="section__title">Почему MeridianVL ищут по запросам “автопрокат Владивосток”</h2>
             <p className="section__desc">
-              Более 8 лет мы делаем аренду автомобилей во Владивостоке простой и комфортной
+              Мы делаем прокат автомобилей понятным для жителей города, туристов,
+              гостей Владивостока и корпоративных клиентов.
             </p>
           </div>
           <div className="benefits-grid">
@@ -162,8 +195,8 @@ export default function HomePage() {
         <div className="container">
           <div className="section__header">
             <div className="section__tag">Как это работает</div>
-            <h2 className="section__title">4 простых шага</h2>
-            <p className="section__desc">Арендовать автомобиль с нами — легко и быстро</p>
+            <h2 className="section__title">Как забронировать авто без лишних формальностей</h2>
+            <p className="section__desc">Понятный путь от выбора автомобиля до старта поездки по Владивостоку и Приморью</p>
           </div>
           <div className="steps-grid">
             {steps.map((step, i) => (
@@ -187,9 +220,10 @@ export default function HomePage() {
         <div className="container">
           <div className="section__header">
             <div className="section__tag">Отзывы клиентов</div>
-            <h2 className="section__title">Что говорят наши клиенты</h2>
+            <h2 className="section__title">Отзывы об аренде авто во Владивостоке</h2>
             <p className="section__desc">
-              Более 5 000 довольных клиентов доверяют нам. Прочитайте реальные отзывы.
+              Реальные впечатления клиентов о прокате автомобилей для города,
+              аэропорта, деловых поездок и маршрутов по Приморскому краю.
             </p>
           </div>
           <div className="reviews-grid">
@@ -204,21 +238,23 @@ export default function HomePage() {
       <section className="cta">
         <div className="container">
           <div className="cta__content">
-            <h2 className="cta__title">Готовы отправиться в путь?</h2>
+            <h2 className="cta__title">Нужен автомобиль во Владивостоке уже сегодня?</h2>
             <p className="cta__desc">
-              Забронируйте автомобиль прямо сейчас или позвоните нам — ответим на все вопросы
+              Оставьте заявку онлайн, чтобы быстро получить подтверждение брони, условия аренды
+              и удобный вариант выдачи автомобиля.
             </p>
             <div className="cta__actions">
               <Link to="/booking" className="btn btn--white btn--lg">
-                Забронировать онлайн
+                Оформить заявку
               </Link>
-              <a href="tel:+74232000000" className="btn btn--outline-white btn--lg">
-                +7 (423) 200-00-00
+              <a href="tel:+79247314800" className="btn btn--outline-white btn--lg">
+                +7 (924) 731-48-00
               </a>
             </div>
           </div>
         </div>
       </section>
-    </main>
+      </main>
+    </>
   );
 }
