@@ -4,10 +4,10 @@ import { Calendar, MapPin, Search } from 'lucide-react';
 import { todayISO, tomorrowISO } from '../utils/dates';
 
 const locations = [
-  'Центр города (ул. Светланская, 82)',
-  'Аэропорт Кневичи',
-  'Железнодорожный вокзал',
-  'Морской вокзал',
+  'Офис MeridianVL — ул. Очаковская, 5 стр. 2',
+  'Аэропорт Владивосток (Кневичи)',
+  'Подача по Владивостоку',
+  'Доставка к отелю или апартаментам',
 ];
 
 export default function QuickBookingForm() {
@@ -36,7 +36,7 @@ export default function QuickBookingForm() {
       <div className="quick-booking__field">
         <label className="quick-booking__label">
           <MapPin size={16} />
-          Место получения
+          Где получить авто
         </label>
         <select
           className="quick-booking__select"
@@ -52,7 +52,7 @@ export default function QuickBookingForm() {
       <div className="quick-booking__field">
         <label className="quick-booking__label">
           <Calendar size={16} />
-          Дата получения
+          Начало аренды
         </label>
         <input
           type="date"
@@ -67,7 +67,7 @@ export default function QuickBookingForm() {
       <div className="quick-booking__field">
         <label className="quick-booking__label">
           <Calendar size={16} />
-          Дата возврата
+          Завершение аренды
         </label>
         <input
           type="date"
@@ -81,7 +81,7 @@ export default function QuickBookingForm() {
 
       <button type="submit" className="btn btn--primary quick-booking__btn">
         <Search size={18} />
-        Найти автомобиль
+        Подобрать авто
       </button>
     </form>
   );

@@ -8,8 +8,8 @@ export default function Header() {
 
   const navLinks = [
     { to: '/', label: 'Главная' },
-    { to: '/cars', label: 'Автомобили' },
-    { to: '/about', label: 'О нас' },
+    { to: '/cars', label: 'Прокат авто' },
+    { to: '/about', label: 'О сервисе' },
     { to: '/contacts', label: 'Контакты' },
   ];
 
@@ -35,19 +35,19 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-            <a href="tel:+74232000000" className="header__phone header__phone--mobile">
+            <a href="tel:+79247314800" className="header__phone header__phone--mobile">
               <Phone size={16} />
-              +7 (423) 200-00-00
+              +7 (924) 731-48-00
             </a>
           </nav>
 
           <div className="header__actions">
-            <a href="tel:+74232000000" className="header__phone">
+            <a href="tel:+79247314800" className="header__phone">
               <Phone size={16} />
-              +7 (423) 200-00-00
+              +7 (924) 731-48-00
             </a>
             <Link to="/booking" className="btn btn--primary btn--sm">
-              Забронировать
+              Быстрая бронь
             </Link>
             <button
               className="header__burger"

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Filter, X, ChevronDown } from 'lucide-react';
 import CarCard from '../components/CarCard';
+import Seo from '../components/Seo';
 import { cars } from '../data/cars';
 import type { Car } from '../types';
 
@@ -61,13 +62,27 @@ export default function CarsPage() {
     category !== 'all' || transmission !== 'all' || maxPrice < 10000 || availableOnly;
 
   return (
-    <main className="cars-page">
+    <>
+      <Seo
+        title="Прокат авто во Владивостоке — каталог автомобилей MeridianVL"
+        description="Каталог MeridianVL: аренда автомобилей во Владивостоке для города, аэропорта и поездок по Приморью. Эконом, комфорт, бизнес-класс, SUV и минивэны с онлайн-заявкой."
+        keywords="прокат авто владивосток, каталог автомобилей аренда владивосток, аренда авто аэропорт кневичи, suv в аренду владивосток, минивэн в аренду владивосток"
+        path="/cars"
+      />
+      <main className="cars-page">
       <div className="page-hero page-hero--sm">
         <div className="container">
-          <h1 className="page-hero__title">Наши автомобили</h1>
+          <div className="page-hero__eyebrow">Каталог MeridianVL</div>
+          <h1 className="page-hero__title">Прокат автомобилей во Владивостоке</h1>
           <p className="page-hero__desc">
-            Найдите идеальный автомобиль для вашей поездки по Приморскому краю
+            Выберите автомобиль для города, аэропорта, деловой поездки,
+            семейного отдыха или авто-тура по Приморскому краю.
           </p>
+          <div className="page-hero__chips">
+            <span className="page-hero__chip">Эконом и комфорт</span>
+            <span className="page-hero__chip">Кроссоверы и минивэны</span>
+            <span className="page-hero__chip">Туризм и командировки</span>
+          </div>
         </div>
       </div>
 
@@ -166,6 +181,10 @@ export default function CarsPage() {
           <p className="cars-page__count">
             Найдено: <strong>{filtered.length}</strong> автомобилей
           </p>
+          <p className="cars-page__intro">
+            Все предложения ориентированы на запросы “аренда авто Владивосток”, “прокат машин в аэропорт”
+            и “автомобиль для путешествия по Приморью” — выбирайте вариант под ваш маршрут и бюджет.
+          </p>
         </div>
 
         {filtered.length > 0 ? (
@@ -183,6 +202,7 @@ export default function CarsPage() {
           </div>
         )}
       </div>
-    </main>
+      </main>
+    </>
   );
 }

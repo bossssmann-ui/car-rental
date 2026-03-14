@@ -1,146 +1,159 @@
 import { Award, Users, Shield, Heart, Target, MapPin } from 'lucide-react';
+import Seo from '../components/Seo';
 
 const team = [
   {
-    name: 'Алексей Морозов',
-    role: 'Директор',
-    desc: '12 лет в автобизнесе. Основал компанию «Меридиан» в 2016 году.',
+    name: 'Отдел бронирования',
+    role: 'Онлайн и телефонные заявки',
+    desc: 'Помогает быстро подобрать автомобиль под маршрут, бюджет, количество пассажиров и формат поездки.',
   },
   {
-    name: 'Наталья Ким',
-    role: 'Менеджер по работе с клиентами',
-    desc: 'Помогает клиентам выбрать идеальный автомобиль с 2018 года.',
+    name: 'Сервис выдачи',
+    role: 'Передача и возврат автомобилей',
+    desc: 'Согласует офисную выдачу, подачу авто в аэропорт Владивостока и удобное время получения.',
   },
   {
-    name: 'Виктор Орлов',
-    role: 'Главный механик',
-    desc: 'Отвечает за техническое состояние всего автопарка.',
+    name: 'Техническая поддержка',
+    role: 'Подготовка автопарка',
+    desc: 'Следит за тем, чтобы автомобили были чистыми, исправными и готовыми к маршрутам по городу и Приморью.',
   },
 ];
 
 const milestones = [
-  { year: '2016', text: 'Основание компании. Первые 5 автомобилей в парке.' },
-  { year: '2018', text: 'Расширение до 20 автомобилей. Открытие офиса у аэропорта.' },
-  { year: '2020', text: 'Запуск онлайн-бронирования. 1000 довольных клиентов.' },
-  { year: '2022', text: 'Обновление автопарка. Добавление гибридных и люкс авто.' },
-  { year: '2024', text: '50+ автомобилей, 4 офиса, 5000+ клиентов.' },
+  { year: 'Офис', text: 'Основная точка обслуживания находится во Владивостоке на ул. Очаковская, 5 стр. 2, оф. 414.' },
+  { year: 'Аэропорт', text: 'MeridianVL делает аренду авто удобной для гостей города за счёт подачи автомобиля в аэропорт Владивостока по согласованию.' },
+  { year: 'Туризм', text: 'Сервис помогает подобрать автомобили для поездок по Приморью: от городских маршрутов до выездов к морю и по трассам края.' },
+  { year: 'Бизнес', text: 'В каталоге есть решения для командировок, встреч партнёров, трансферов и долгосрочной аренды для компаний.' },
+  { year: 'Онлайн', text: 'Заявку на прокат автомобиля можно оставить через сайт, чтобы заранее согласовать выдачу, сроки и нужный класс авто.' },
 ];
 
 export default function AboutPage() {
   return (
-    <main className="about-page">
-      <div className="page-hero">
-        <div className="container">
-          <h1 className="page-hero__title">О компании МеридианVL</h1>
-          <p className="page-hero__desc">
-            Лучший автопрокат Владивостока с 2016 года
-          </p>
+    <>
+      <Seo
+        title="О сервисе MeridianVL — аренда авто, аэропорт и поездки по Приморью"
+        description="MeridianVL — сервис аренды автомобилей во Владивостоке. Подбор авто для туристов, бизнеса, трансферов и самостоятельных маршрутов по Приморскому краю."
+        keywords="о компании meridianvl, автопрокат владивосток сервис, аренда авто приморье, авто для туристов владивосток"
+        path="/about"
+      />
+      <main className="about-page">
+        <div className="page-hero">
+          <div className="container">
+            <div className="page-hero__eyebrow">О сервисе MeridianVL</div>
+            <h1 className="page-hero__title">Аренда авто с фокусом на Владивосток и Приморье</h1>
+            <p className="page-hero__desc">
+              Сервис помогает быстро получить автомобиль для города, аэропорта,
+              командировки, семейного отдыха и авто-туризма.
+            </p>
+            <div className="page-hero__chips">
+              <span className="page-hero__chip">Офис во Владивостоке</span>
+              <span className="page-hero__chip">Подача в аэропорт</span>
+              <span className="page-hero__chip">Туризм и бизнес</span>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div className="container">
-        {/* Mission */}
-        <section className="about-section">
-          <div className="about-intro">
-            <div className="about-intro__text">
-              <h2 className="about-intro__title">Наша миссия</h2>
-              <p>
-                МеридианVL — это не просто автопрокат. Мы помогаем жителям и гостям Владивостока
-                путешествовать свободно и комфортно по всему Приморскому краю.
-              </p>
-              <p>
-                Мы верим, что хорошая аренда автомобиля должна быть простой, прозрачной
-                и доступной каждому. Поэтому мы постоянно обновляем автопарк, обучаем персонал
-                и улучшаем сервис.
-              </p>
-              <p>
-                За 8 лет работы мы помогли более чем 5 000 клиентам — туристам, командировочным,
-                местным жителям — сделать их поездки незабываемыми.
-              </p>
-            </div>
-            <div className="about-intro__values">
-              <div className="value-item">
-                <Target size={24} />
-                <div>
-                  <h3>Клиент на первом месте</h3>
-                  <p>Ваши интересы — наш главный приоритет</p>
+        <div className="container">
+          <section className="about-section">
+            <div className="about-intro">
+              <div className="about-intro__text">
+                <h2 className="about-intro__title">Наша миссия</h2>
+                <p>
+                  MeridianVL — это сервис аренды автомобилей во Владивостоке, который помогает
+                  быстро получить подходящую машину для города, аэропорта, деловой поездки
+                  или путешествия по Приморскому краю.
+                </p>
+                <p>
+                  Мы делаем акцент на понятных условиях проката, предварительном согласовании деталей
+                  и подборе автомобиля под конкретную задачу: будь то поездка по Владивостоку,
+                  трансфер гостей или маршрут к морю и природным локациям.
+                </p>
+                <p>
+                  Для клиента это означает меньше формальностей, больше ясности по условиям аренды
+                  и сервис, ориентированный на комфортное начало поездки.
+                </p>
+              </div>
+              <div className="about-intro__values">
+                <div className="value-item">
+                  <Target size={24} />
+                  <div>
+                    <h3>Клиент на первом месте</h3>
+                    <p>Подбираем формат аренды под маршрут, багаж, пассажиров и сроки поездки</p>
+                  </div>
+                </div>
+                <div className="value-item">
+                  <Shield size={24} />
+                  <div>
+                    <h3>Безопасность</h3>
+                    <p>Исправные автомобили, подготовка к выдаче и понятные условия получения</p>
+                  </div>
+                </div>
+                <div className="value-item">
+                  <Heart size={24} />
+                  <div>
+                    <h3>Честность</h3>
+                    <p>Прозрачная коммуникация по стоимости аренды, депозиту и дополнительным опциям</p>
+                  </div>
                 </div>
               </div>
-              <div className="value-item">
-                <Shield size={24} />
-                <div>
-                  <h3>Безопасность</h3>
-                  <p>Регулярное ТО, страховка, исправные авто</p>
-                </div>
-              </div>
-              <div className="value-item">
-                <Heart size={24} />
-                <div>
-                  <h3>Честность</h3>
-                  <p>Никаких скрытых платежей и ненужных доплат</p>
-                </div>
-              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Stats */}
-        <section className="about-section">
-          <div className="about-stats">
-            <div className="about-stat">
-              <Award size={36} />
-              <span className="about-stat__value">8+</span>
-              <span className="about-stat__label">лет работы</span>
-            </div>
-            <div className="about-stat">
-              <Users size={36} />
-              <span className="about-stat__value">5000+</span>
-              <span className="about-stat__label">довольных клиентов</span>
-            </div>
-            <div className="about-stat">
-              <Shield size={36} />
-              <span className="about-stat__value">50+</span>
-              <span className="about-stat__label">автомобилей</span>
-            </div>
-            <div className="about-stat">
-              <MapPin size={36} />
-              <span className="about-stat__value">4</span>
-              <span className="about-stat__label">офиса во Владивостоке</span>
-            </div>
-          </div>
-        </section>
-
-        {/* Timeline */}
-        <section className="about-section">
-          <h2 className="about-section__title">История компании</h2>
-          <div className="timeline">
-            {milestones.map((m) => (
-              <div key={m.year} className="timeline-item">
-                <div className="timeline-item__year">{m.year}</div>
-                <div className="timeline-item__dot" />
-                <div className="timeline-item__text">{m.text}</div>
+          <section className="about-section">
+            <div className="about-stats">
+              <div className="about-stat">
+                <Award size={36} />
+                <span className="about-stat__value">Город</span>
+                <span className="about-stat__label">авто для ежедневных поездок по Владивостоку</span>
               </div>
-            ))}
-          </div>
-        </section>
+              <div className="about-stat">
+                <Users size={36} />
+                <span className="about-stat__value">Туризм</span>
+                <span className="about-stat__label">маршруты по Приморью для пар, семей и компаний</span>
+              </div>
+              <div className="about-stat">
+                <Shield size={36} />
+                <span className="about-stat__value">Бизнес</span>
+                <span className="about-stat__label">решения для командировок и встреч партнёров</span>
+              </div>
+              <div className="about-stat">
+                <MapPin size={36} />
+                <span className="about-stat__value">Аэропорт</span>
+                <span className="about-stat__label">удобная подача автомобиля по согласованию</span>
+              </div>
+            </div>
+          </section>
 
-        {/* Team */}
-        <section className="about-section">
-          <h2 className="about-section__title">Наша команда</h2>
-          <div className="team-grid">
-            {team.map((member) => (
-              <div key={member.name} className="team-card">
-                <div className="team-card__avatar">
-                  {member.name.charAt(0)}
+          <section className="about-section">
+            <h2 className="about-section__title">Что важно знать о сервисе</h2>
+            <div className="timeline">
+              {milestones.map((m) => (
+                <div key={m.year} className="timeline-item">
+                  <div className="timeline-item__year">{m.year}</div>
+                  <div className="timeline-item__dot" />
+                  <div className="timeline-item__text">{m.text}</div>
                 </div>
-                <h3 className="team-card__name">{member.name}</h3>
-                <p className="team-card__role">{member.role}</p>
-                <p className="team-card__desc">{member.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      </div>
-    </main>
+              ))}
+            </div>
+          </section>
+
+          <section className="about-section">
+            <h2 className="about-section__title">Как устроен сервис</h2>
+            <div className="team-grid">
+              {team.map((member) => (
+                <div key={member.name} className="team-card">
+                  <div className="team-card__avatar">
+                    {member.name.charAt(0)}
+                  </div>
+                  <h3 className="team-card__name">{member.name}</h3>
+                  <p className="team-card__role">{member.role}</p>
+                  <p className="team-card__desc">{member.desc}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+      </main>
+    </>
   );
 }
