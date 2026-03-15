@@ -10,6 +10,8 @@ const badges = [
   { icon: MapPin, label: 'Доставка в аэропорт' },
 ];
 
+const EASE_OUT_EXPO = [0.22, 1, 0.36, 1] as const;
+
 const containerVariants = {
   hidden: {},
   visible: {
@@ -25,7 +27,7 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+    transition: { duration: 0.7, ease: EASE_OUT_EXPO },
   },
 };
 
@@ -110,7 +112,7 @@ export default function Hero() {
               <motion.span
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
-                transition={{ duration: 1, delay: 0.8, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+                transition={{ duration: 1, delay: 0.8, ease: EASE_OUT_EXPO }}
                 className="absolute bottom-1 left-0 right-0 h-[3px] bg-gradient-to-r from-[#D4AF37]/0 via-[#D4AF37] to-[#D4AF37]/0 origin-left"
               />
             </span>
