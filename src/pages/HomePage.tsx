@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { Shield, Clock, MapPin, ThumbsUp, Award, Headphones, ChevronRight, CheckCircle } from 'lucide-react';
-import QuickBookingForm from '../components/QuickBookingForm';
+import { Shield, Clock, MapPin, ThumbsUp, Award, Headphones, ChevronRight } from 'lucide-react';
 import CarCard from '../components/CarCard';
 import ReviewCard from '../components/ReviewCard';
 import Seo from '../components/Seo';
+import Hero from '../components/layout/Hero';
 import { cars, reviews } from '../data/cars';
 
 const benefits = [
@@ -53,11 +53,6 @@ const stats = [
   { value: 'Приморье', label: 'авто для туризма, города и трассы' },
 ];
 
-const heroHighlights = [
-  'Аренда авто во Владивостоке с подачей в аэропорт',
-  'Автомобили для туристов, командировок и семейных маршрутов',
-  'Прозрачные условия проката и быстрое подтверждение заявки',
-];
 
 export default function HomePage() {
   const featuredCars = cars.filter((c) => c.available).slice(0, 4);
@@ -80,51 +75,8 @@ export default function HomePage() {
           areaServed: ['Владивосток', 'Аэропорт Владивосток (Кневичи)', 'Приморский край'],
         }}
       />
+      <Hero />
       <main>
-      {/* Hero */}
-      <section className="hero">
-        <div className="hero__bg" aria-hidden="true">
-          <div className="hero__bg-overlay" />
-        </div>
-        <div className="container">
-            <div className="hero__content">
-              <div className="hero__badge">
-                <CheckCircle size={16} />
-                Прокат автомобилей во Владивостоке и в аэропорту
-              </div>
-              <h1 className="hero__title">
-                Аренда авто для города,<br />
-                <span className="hero__title-accent">аэропорта и путешествий по Приморью</span>
-              </h1>
-              <p className="hero__subtitle">
-                MeridianVL помогает быстро арендовать автомобиль во Владивостоке:
-                от эконом-класса до минивэнов и SUV. Удобно для туристов, деловых поездок,
-                трансферов и самостоятельных маршрутов по Приморскому краю.
-              </p>
-              <div className="hero__highlights">
-                {heroHighlights.map((item) => (
-                  <div key={item} className="hero__highlight">
-                    <CheckCircle size={16} />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="hero__actions">
-                <Link to="/cars" className="btn btn--primary btn--lg">
-                  Выбрать автомобиль
-                  <ChevronRight size={20} />
-                </Link>
-                <a href="tel:+79247314800" className="btn btn--outline-white btn--lg">
-                  Позвонить менеджеру
-                </a>
-              </div>
-            </div>
-          <div className="hero__booking">
-            <div className="hero__booking-title">Онлайн-заявка на аренду</div>
-            <QuickBookingForm />
-          </div>
-        </div>
-      </section>
 
       {/* Stats */}
       <section className="stats">
