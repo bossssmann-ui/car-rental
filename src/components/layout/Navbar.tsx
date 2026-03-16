@@ -38,9 +38,9 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           
           <Link to="/" className="flex items-center gap-1.5 group">
-            <span className="text-xl font-light text-white tracking-widest group-hover:text-[#D4AF37] transition-colors">PACIFIC</span>
+            <span className="text-xl font-light text-white tracking-widest group-hover:text-[#D4AF37] transition-colors">MERIDIAN</span>
             <span className="w-1 h-1 rounded-full bg-[#D4AF37]" />
-            <span className="text-xl font-bold text-white tracking-widest group-hover:text-[#D4AF37] transition-colors">STAR</span>
+            <span className="text-xl font-bold text-white tracking-widest group-hover:text-[#D4AF37] transition-colors">VL</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-8">

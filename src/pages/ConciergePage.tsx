@@ -5,7 +5,7 @@ export default function ConciergePage() {
   return (
     <>
       <Seo
-        title="Консьерж-сервис — PACIFIC STAR Владивосток"
+        title="Консьерж-сервис — Meridian VL Владивосток"
         description="Премиальный консьерж-сервис аренды авто во Владивостоке: личный водитель, подача к трапу, анонимность."
         path="/concierge"
       />
