@@ -1,5 +1,7 @@
 import type { Car } from '../types';
 
+export type CarCategory = Car['category'];
+
 export const premiumCars: Car[] = [
   {
     id: 101,

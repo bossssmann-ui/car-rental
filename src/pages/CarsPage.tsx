@@ -1,208 +1,160 @@
 import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Filter, X, ChevronDown } from 'lucide-react';
-import CarCard from '../components/CarCard';
-import Seo from '../components/Seo';
-import { cars } from '../data/cars';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Star, Users, Briefcase, Calendar } from 'lucide-react';
+import { premiumCars } from '../data/premiumCars';
+import type { CarCategory } from '../data/premiumCars';
+import BookingModal from '../components/ui/BookingModal';
 import type { Car } from '../types';
 
-const categories: { value: Car['category'] | 'all'; label: string }[] = [
-  { value: 'all', label: 'Все' },
-  { value: 'economy', label: 'Эконом' },
-  { value: 'comfort', label: 'Комфорт' },
-  { value: 'business', label: 'Бизнес' },
-  { value: 'suv', label: 'Внедорожник' },
-  { value: 'minivan', label: 'Минивэн' },
-];
+type FilterCategory = CarCategory | 'all';
 
-const sortOptions = [
-  { value: 'price-asc', label: 'По цене: сначала дешевле' },
-  { value: 'price-desc', label: 'По цене: сначала дороже' },
-  { value: 'rating-desc', label: 'По рейтингу' },
-  { value: 'name-asc', label: 'По названию' },
-];
+const CATEGORY_LABELS: Record<CarCategory, string> = {
+  economy: 'Эконом',
+  comfort: 'Комфорт',
+  business: 'Бизнес',
+  suv: 'Внедорожник',
+  minivan: 'Минивэн',
+};
+
+const TRANSMISSION_LABELS: Record<Car['transmission'], string> = {
+  automatic: 'Автомат',
+  manual: 'Механика',
+};
+
+const uniqueCategories = Array.from(new Set(premiumCars.map((c) => c.category)));
 
 export default function CarsPage() {
-  const [searchParams] = useSearchParams();
-  // Derive category from URL param; local state overrides when user clicks tabs
-  const urlCategory = (searchParams.get('category') as Car['category']) || 'all';
+  const [activeCategory, setActiveCategory] = useState<FilterCategory>('all');
+  const [selectedCar, setSelectedCar] = useState<Car | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [categoryOverride, setCategoryOverride] = useState<Car['category'] | 'all' | null>(null);
-  const category = categoryOverride ?? urlCategory;
+  const filteredCars =
+    activeCategory === 'all'
+      ? premiumCars
+      : premiumCars.filter((car) => car.category === activeCategory);
 
-  const [transmission, setTransmission] = useState<Car['transmission'] | 'all'>('all');
-  const [maxPrice, setMaxPrice] = useState<number>(10000);
-  const [sortBy, setSortBy] = useState('price-asc');
-  const [showFilters, setShowFilters] = useState(false);
-  const [availableOnly, setAvailableOnly] = useState(false);
-
-  const filtered = cars
-    .filter((c) => category === 'all' || c.category === category)
-    .filter((c) => transmission === 'all' || c.transmission === transmission)
-    .filter((c) => c.pricePerDay <= maxPrice)
-    .filter((c) => !availableOnly || c.available)
-    .sort((a, b) => {
-      switch (sortBy) {
-        case 'price-asc': return a.pricePerDay - b.pricePerDay;
-        case 'price-desc': return b.pricePerDay - a.pricePerDay;
-        case 'rating-desc': return b.rating - a.rating;
-        case 'name-asc': return a.name.localeCompare(b.name);
-        default: return 0;
-      }
-    });
-
-  const clearFilters = () => {
-    setCategoryOverride('all');
-    setTransmission('all');
-    setMaxPrice(10000);
-    setAvailableOnly(false);
+  const handleBookClick = (car: Car) => {
+    setSelectedCar(car);
+    setIsModalOpen(true);
   };
 
-  const hasActiveFilters =
-    category !== 'all' || transmission !== 'all' || maxPrice < 10000 || availableOnly;
-
   return (
-    <>
-      <Seo
-        title="Прокат авто во Владивостоке — каталог автомобилей MeridianVL"
-        description="Каталог MeridianVL: аренда автомобилей во Владивостоке для города, аэропорта и поездок по Приморью. Эконом, комфорт, бизнес-класс, SUV и минивэны с онлайн-заявкой."
-        keywords="прокат авто владивосток, каталог автомобилей аренда владивосток, аренда авто аэропорт кневичи, suv в аренду владивосток, минивэн в аренду владивосток"
-        path="/cars"
-      />
-      <main className="cars-page">
-      <div className="page-hero page-hero--sm">
-        <div className="container">
-          <div className="page-hero__eyebrow">Каталог MeridianVL</div>
-          <h1 className="page-hero__title">Прокат автомобилей во Владивостоке</h1>
-          <p className="page-hero__desc">
-            Выберите автомобиль для города, аэропорта, деловой поездки,
-            семейного отдыха или авто-тура по Приморскому краю.
-          </p>
-          <div className="page-hero__chips">
-            <span className="page-hero__chip">Эконом и комфорт</span>
-            <span className="page-hero__chip">Кроссоверы и минивэны</span>
-            <span className="page-hero__chip">Туризм и командировки</span>
-          </div>
-        </div>
-      </div>
+    <div className="min-h-screen bg-[#050505] pt-32 pb-24 px-6 relative">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-[#D4AF37]/5 blur-[120px] pointer-events-none" />
 
-      <div className="container">
-        <div className="cars-page__toolbar">
-          <div className="cars-page__cats">
-            {categories.map((cat) => (
-              <button
-                key={cat.value}
-                className={`cats-btn${category === cat.value ? ' cats-btn--active' : ''}`}
-                onClick={() => setCategoryOverride(cat.value as Car['category'] | 'all')}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-          <div className="cars-page__toolbar-right">
-            <div className="sort-select">
-              <ChevronDown size={16} />
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="sort-select__input"
-              >
-                {sortOptions.map((o) => (
-                  <option key={o.value} value={o.value}>{o.label}</option>
-                ))}
-              </select>
-            </div>
+      <div className="max-w-7xl mx-auto relative z-10">
+
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-6xl font-light text-white mb-4 tracking-tight">
+            Автопарк <span className="font-bold text-[#D4AF37]">Meridian VL</span>
+          </h1>
+          <p className="text-neutral-400 text-lg max-w-2xl mx-auto">
+            Идеальное техническое состояние, безупречная чистота и максимальная комплектация. Выберите свой автомобиль для поездки по Владивостоку.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
+          <button
+            onClick={() => setActiveCategory('all')}
+            className={`px-6 py-2.5 rounded-full text-sm font-medium tracking-wide transition-all duration-300 ${
+              activeCategory === 'all'
+                ? 'bg-[#D4AF37] text-black shadow-[0_0_20px_rgba(212,175,55,0.3)]'
+                : 'bg-white/5 text-neutral-400 border border-white/10 hover:border-white/30 hover:text-white'
+            }`}
+          >
+            Все модели
+          </button>
+          {uniqueCategories.map((cat) => (
             <button
-              className={`filter-toggle${showFilters ? ' filter-toggle--active' : ''}`}
-              onClick={() => setShowFilters(!showFilters)}
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-6 py-2.5 rounded-full text-sm font-medium tracking-wide transition-all duration-300 ${
+                activeCategory === cat
+                  ? 'bg-[#D4AF37] text-black shadow-[0_0_20px_rgba(212,175,55,0.3)]'
+                  : 'bg-white/5 text-neutral-400 border border-white/10 hover:border-white/30 hover:text-white'
+              }`}
             >
-              <Filter size={16} />
-              Фильтры
-              {hasActiveFilters && <span className="filter-toggle__dot" />}
+              {CATEGORY_LABELS[cat]}
             </button>
-          </div>
+          ))}
         </div>
 
-        {showFilters && (
-          <div className="filters-panel">
-            <div className="filters-panel__row">
-              <div className="filter-group">
-                <label className="filter-group__label">Коробка передач</label>
-                <div className="filter-group__btns">
-                  {(['all', 'automatic', 'manual'] as const).map((t) => (
-                    <button
-                      key={t}
-                      className={`cats-btn${transmission === t ? ' cats-btn--active' : ''}`}
-                      onClick={() => setTransmission(t)}
-                    >
-                      {t === 'all' ? 'Все' : t === 'automatic' ? 'Автомат' : 'Механика'}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="filter-group">
-                <label className="filter-group__label">
-                  Цена до: <strong>{maxPrice.toLocaleString('ru-RU')} ₽/день</strong>
-                </label>
-                <input
-                  type="range"
-                  min={1000}
-                  max={10000}
-                  step={500}
-                  value={maxPrice}
-                  onChange={(e) => setMaxPrice(Number(e.target.value))}
-                  className="filter-group__range"
-                />
-              </div>
-
-              <div className="filter-group">
-                <label className="filter-group__checkbox">
-                  <input
-                    type="checkbox"
-                    checked={availableOnly}
-                    onChange={(e) => setAvailableOnly(e.target.checked)}
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <AnimatePresence>
+            {filteredCars.map((car) => (
+              <motion.div
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+                key={car.id}
+                className="group relative bg-[#111] border border-white/10 rounded-3xl overflow-hidden hover:border-[#D4AF37]/50 transition-colors duration-500"
+              >
+                <div className="h-56 relative bg-gradient-to-t from-[#0a0a0a] to-white/5 p-6 flex items-center justify-center">
+                  <img
+                    src={car.image}
+                    alt={car.name}
+                    className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700 drop-shadow-2xl"
                   />
-                  Только доступные
-                </label>
-              </div>
+                  <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[10px] font-bold text-white tracking-widest uppercase">
+                    {CATEGORY_LABELS[car.category]}
+                  </div>
+                </div>
 
-              {hasActiveFilters && (
-                <button className="btn btn--ghost btn--sm" onClick={clearFilters}>
-                  <X size={14} />
-                  Сбросить фильтры
-                </button>
-              )}
-            </div>
-          </div>
-        )}
-
-        <div className="cars-page__results">
-          <p className="cars-page__count">
-            Найдено: <strong>{filtered.length}</strong> автомобилей
-          </p>
-          <p className="cars-page__intro">
-            Все предложения ориентированы на запросы “аренда авто Владивосток”, “прокат машин в аэропорт”
-            и “автомобиль для путешествия по Приморью” — выбирайте вариант под ваш маршрут и бюджет.
-          </p>
-        </div>
-
-        {filtered.length > 0 ? (
-          <div className="cars-grid cars-grid--3col">
-            {filtered.map((car) => (
-              <CarCard key={car.id} car={car} />
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-white mb-2">{car.name}</h3>
+                  <div className="grid grid-cols-2 gap-3 mb-6 border-y border-white/5 py-4">
+                    <div className="flex items-center gap-2 text-neutral-400 text-sm">
+                      <Star className="w-4 h-4 text-[#D4AF37]" />
+                      {car.rating.toFixed(1)} / 5.0
+                    </div>
+                    <div className="flex items-center gap-2 text-neutral-400 text-sm">
+                      <Users className="w-4 h-4 text-[#D4AF37]" />
+                      {car.seats} мест
+                    </div>
+                    <div className="flex items-center gap-2 text-neutral-400 text-sm">
+                      <Briefcase className="w-4 h-4 text-[#D4AF37]" />
+                      {TRANSMISSION_LABELS[car.transmission]}
+                    </div>
+                    <div className="flex items-center gap-2 text-neutral-400 text-sm">
+                      <Calendar className="w-4 h-4 text-[#D4AF37]" />
+                      {car.year} г.
+                    </div>
+                  </div>
+                  <div className="flex items-end justify-between mt-auto">
+                    <div>
+                      <p className="text-xs text-neutral-500 uppercase tracking-widest mb-1">От</p>
+                      <p className="text-xl text-white font-light">
+                        {car.pricePerDay.toLocaleString('ru-RU')} ₽{' '}
+                        <span className="text-sm text-neutral-500">/ сут</span>
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => handleBookClick(car)}
+                      className="px-6 py-3 rounded-xl bg-white text-black text-sm font-bold uppercase tracking-widest hover:bg-[#D4AF37] transition-colors"
+                    >
+                      Бронь
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
             ))}
-          </div>
-        ) : (
-          <div className="empty-state">
-            <p className="empty-state__text">По вашим фильтрам ничего не найдено</p>
-            <button className="btn btn--outline" onClick={clearFilters}>
-              Сбросить фильтры
-            </button>
+          </AnimatePresence>
+        </motion.div>
+
+        {filteredCars.length === 0 && (
+          <div className="text-center py-20 text-neutral-500">
+            В данной категории пока нет доступных автомобилей.
           </div>
         )}
       </div>
-      </main>
-    </>
+
+      <BookingModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        selectedCar={selectedCar}
+      />
+    </div>
   );
 }

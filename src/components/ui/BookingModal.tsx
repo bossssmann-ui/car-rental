@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, MessageCircle } from 'lucide-react';
 
 interface Car {
-  id: string;
+  id: number | string;
   name: string;
   pricePerDay: number;
   image: string;
