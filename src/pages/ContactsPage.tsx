@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock, MessageSquare, Send, CheckCircle } from 'lucide-react';
 import Seo from '../components/Seo';
+import { EASE_OUT_EXPO } from '../utils/motion';
 
 const offices = [
   {
@@ -18,6 +20,15 @@ const offices = [
     mapUrl: 'https://yandex.ru/maps/75/vladivostok/?ll=132.148093%2C43.401541&z=14',
   },
 ];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: i * 0.1, ease: EASE_OUT_EXPO },
+  }),
+};
 
 export default function ContactsPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -46,154 +57,282 @@ export default function ContactsPage() {
         keywords="контакты автопрокат владивосток, meridianvl телефон, аренда авто аэропорт владивосток контакты, офис meridianvl"
         path="/contacts"
       />
-      <main className="contacts-page">
-        <div className="page-hero page-hero--sm">
-          <div className="container">
-            <div className="page-hero__eyebrow">Связаться с MeridianVL</div>
-            <h1 className="page-hero__title">Контакты автопроката во Владивостоке</h1>
-            <p className="page-hero__desc">
+
+      <div className="min-h-screen bg-[#050505] text-white">
+        {/* Hero */}
+        <div className="relative pt-40 pb-24 px-6 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-[#D4AF37]/5 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-72 bg-[#D4AF37]/8 blur-[120px] pointer-events-none" />
+          <div className="max-w-3xl mx-auto text-center relative z-10">
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-[#D4AF37] text-xs font-semibold uppercase tracking-[0.25em] mb-6"
+            >
+              Связаться с MeridianVL
+            </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-4xl md:text-6xl font-light tracking-tight mb-6"
+            >
+              Контакты{' '}
+              <span className="font-bold text-[#D4AF37]">автопроката</span>
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-neutral-400 text-lg max-w-xl mx-auto mb-10"
+            >
               Позвоните, отправьте заявку или приезжайте в офис, чтобы быстро оформить аренду авто
               для города, аэропорта и поездок по Приморью.
-            </p>
-            <div className="page-hero__chips">
-              <span className="page-hero__chip">ул. Очаковская, 5 стр. 2</span>
-              <span className="page-hero__chip">+7 (924) 731-48-00</span>
-              <span className="page-hero__chip">Аэропорт Кневичи</span>
-            </div>
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-wrap justify-center gap-3"
+            >
+              {['ул. Очаковская, 5 стр. 2', '+7 (924) 731-48-00', 'Аэропорт Кневичи'].map((chip) => (
+                <span
+                  key={chip}
+                  className="px-4 py-1.5 rounded-full text-xs font-medium tracking-wide bg-white/5 border border-white/10 text-neutral-300"
+                >
+                  {chip}
+                </span>
+              ))}
+            </motion.div>
           </div>
         </div>
 
-        <div className="container">
-          <div className="contacts-grid">
-            <div className="contacts-info">
-              <h2 className="contacts-info__title">Наши офисы</h2>
-              {offices.map((office) => (
-                <div key={office.name} className="office-card">
-                  <h3 className="office-card__name">{office.name}</h3>
-                  <div className="office-card__detail">
-                    <MapPin size={16} />
-                    <a
-                      href={office.mapUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="office-card__link"
-                    >
-                      {office.address}
-                    </a>
+        {/* Main grid */}
+        <section className="px-6 pb-20">
+          <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10">
+
+            {/* Left: office cards + messengers */}
+            <div className="space-y-6">
+              <motion.h2
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-2xl font-light text-white mb-2"
+              >
+                Наши <span className="text-[#D4AF37] font-bold">офисы</span>
+              </motion.h2>
+
+              {offices.map((office, i) => (
+                <motion.div
+                  key={office.name}
+                  custom={i}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={fadeUp}
+                  className="bg-[#111] border border-white/10 rounded-2xl p-6 hover:border-[#D4AF37]/30 transition-colors duration-300"
+                >
+                  <h3 className="text-white font-semibold text-lg mb-4">{office.name}</h3>
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-3 text-neutral-400 text-sm">
+                      <MapPin className="w-4 h-4 text-[#D4AF37] mt-0.5 shrink-0" />
+                      <a
+                        href={office.mapUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-[#D4AF37] transition-colors"
+                      >
+                        {office.address}
+                      </a>
+                    </div>
+                    <div className="flex items-center gap-3 text-neutral-400 text-sm">
+                      <Phone className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                      <a
+                        href={`tel:${office.phone.replace(/\D/g, '')}`}
+                        className="hover:text-[#D4AF37] transition-colors"
+                      >
+                        {office.phone}
+                      </a>
+                    </div>
+                    <div className="flex items-center gap-3 text-neutral-400 text-sm">
+                      <Clock className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                      <span>{office.hours}</span>
+                    </div>
                   </div>
-                  <div className="office-card__detail">
-                    <Phone size={16} />
-                    <a href={`tel:${office.phone.replace(/\D/g, '')}`} className="office-card__link">
-                      {office.phone}
-                    </a>
-                  </div>
-                  <div className="office-card__detail">
-                    <Clock size={16} />
-                    <span>{office.hours}</span>
-                  </div>
-                </div>
+                </motion.div>
               ))}
 
-              <div className="office-card">
-                <h3 className="office-card__name">Электронная почта</h3>
-                <div className="office-card__detail">
-                  <Mail size={16} />
-                  <a href="mailto:info@meridianvl.pro" className="office-card__link">
+              <motion.div
+                custom={2}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                className="bg-[#111] border border-white/10 rounded-2xl p-6 hover:border-[#D4AF37]/30 transition-colors duration-300"
+              >
+                <h3 className="text-white font-semibold text-lg mb-4">Электронная почта</h3>
+                <div className="flex items-center gap-3 text-neutral-400 text-sm">
+                  <Mail className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                  <a href="mailto:info@meridianvl.pro" className="hover:text-[#D4AF37] transition-colors">
                     info@meridianvl.pro
                   </a>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="contacts-messengers">
-                <h3 className="contacts-messengers__title">Быстрая связь</h3>
-                <div className="contacts-messengers__btns">
+              <motion.div
+                custom={3}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                className="bg-[#111] border border-white/10 rounded-2xl p-6"
+              >
+                <h3 className="text-white font-semibold text-lg mb-4">Быстрая связь</h3>
+                <div className="flex gap-3">
                   <a
                     href="https://wa.me/79247314800"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="messenger-btn messenger-btn--whatsapp"
+                    className="flex-1 py-3 rounded-xl bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] text-sm font-semibold text-center tracking-wide hover:bg-[#25D366]/20 transition-colors"
                   >
                     WhatsApp
                   </a>
-                  <a href="tel:+74232014800" className="messenger-btn messenger-btn--phone">
+                  <a
+                    href="tel:+74232014800"
+                    className="flex-1 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm font-semibold text-center tracking-wide hover:bg-white/10 transition-colors"
+                  >
                     Позвонить
                   </a>
                 </div>
-              </div>
+              </motion.div>
             </div>
 
-            <div className="contacts-form-wrap">
-              <h2 className="contacts-form__title">
-                <MessageSquare size={22} />
-                Написать по аренде авто
-              </h2>
+            {/* Right: form */}
+            <motion.div
+              initial={{ opacity: 0, x: 32 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: EASE_OUT_EXPO }}
+              className="bg-[#111] border border-white/10 rounded-2xl p-8"
+            >
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-10 h-10 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center">
+                  <MessageSquare className="w-5 h-5 text-[#D4AF37]" />
+                </div>
+                <h2 className="text-2xl font-light text-white">
+                  Написать по <span className="text-[#D4AF37] font-bold">аренде авто</span>
+                </h2>
+              </div>
+
               {submitted ? (
-                <div className="contacts-form-success">
-                  <CheckCircle size={48} />
-                  <p>Сообщение отправлено! Мы ответим вам в ближайшее время и поможем с подбором автомобиля.</p>
+                <div className="flex flex-col items-center justify-center py-16 text-center gap-4">
+                  <div className="w-16 h-16 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center">
+                    <CheckCircle className="w-8 h-8 text-[#D4AF37]" />
+                  </div>
+                  <p className="text-neutral-300 max-w-xs leading-relaxed">
+                    Сообщение отправлено! Мы ответим вам в ближайшее время и поможем с подбором автомобиля.
+                  </p>
                 </div>
               ) : (
-                <form className="contacts-form" onSubmit={handleSubmit} noValidate>
-                  <div className="form-group">
-                    <label className="form-label" htmlFor="c-name">Ваше имя *</label>
+                <form onSubmit={handleSubmit} noValidate className="space-y-5">
+                  <div>
+                    <label htmlFor="c-name" className="block text-xs font-medium text-neutral-400 uppercase tracking-widest mb-2">
+                      Ваше имя *
+                    </label>
                     <input
                       id="c-name"
                       type="text"
-                      className={`form-control${errors.name ? ' form-control--error' : ''}`}
                       placeholder="Иван Иванов"
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder:text-neutral-600 text-sm focus:outline-none focus:border-[#D4AF37]/50 transition-colors ${
+                        errors.name ? 'border-red-500/50' : 'border-white/10'
+                      }`}
                     />
-                    {errors.name && <p className="form-error">{errors.name}</p>}
+                    {errors.name && <p className="mt-1.5 text-xs text-red-400">{errors.name}</p>}
                   </div>
-                  <div className="form-group">
-                    <label className="form-label" htmlFor="c-phone">Телефон *</label>
+
+                  <div>
+                    <label htmlFor="c-phone" className="block text-xs font-medium text-neutral-400 uppercase tracking-widest mb-2">
+                      Телефон *
+                    </label>
                     <input
                       id="c-phone"
                       type="tel"
-                      className={`form-control${errors.phone ? ' form-control--error' : ''}`}
                       placeholder="+7 (924) 731-48-00"
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                      className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder:text-neutral-600 text-sm focus:outline-none focus:border-[#D4AF37]/50 transition-colors ${
+                        errors.phone ? 'border-red-500/50' : 'border-white/10'
+                      }`}
                     />
-                    {errors.phone && <p className="form-error">{errors.phone}</p>}
+                    {errors.phone && <p className="mt-1.5 text-xs text-red-400">{errors.phone}</p>}
                   </div>
-                  <div className="form-group">
-                    <label className="form-label" htmlFor="c-message">Сообщение *</label>
+
+                  <div>
+                    <label htmlFor="c-message" className="block text-xs font-medium text-neutral-400 uppercase tracking-widest mb-2">
+                      Сообщение *
+                    </label>
                     <textarea
                       id="c-message"
-                      className={`form-control form-control--textarea${errors.message ? ' form-control--error' : ''}`}
                       placeholder="Нужен автомобиль в аэропорт, по Владивостоку или для поездки по Приморью..."
                       rows={5}
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-white placeholder:text-neutral-600 text-sm focus:outline-none focus:border-[#D4AF37]/50 transition-colors resize-none ${
+                        errors.message ? 'border-red-500/50' : 'border-white/10'
+                      }`}
                     />
-                    {errors.message && <p className="form-error">{errors.message}</p>}
+                    {errors.message && <p className="mt-1.5 text-xs text-red-400">{errors.message}</p>}
                   </div>
-                  <button type="submit" className="btn btn--primary btn--lg">
-                    <Send size={18} />
+
+                  <button
+                    type="submit"
+                    className="w-full flex items-center justify-center gap-2 py-4 bg-[#D4AF37] text-black text-sm font-bold uppercase tracking-widest rounded-xl hover:bg-[#c9a227] transition-colors"
+                  >
+                    <Send className="w-4 h-4" />
                     Отправить запрос
                   </button>
                 </form>
               )}
-            </div>
+            </motion.div>
           </div>
+        </section>
 
-          <div className="contacts-map">
-            <h2 className="contacts-map__title">Офис MeridianVL на карте</h2>
-            <div className="contacts-map__embed">
+        {/* Map */}
+        <section className="px-6 pb-28">
+          <div className="max-w-7xl mx-auto">
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-2xl font-light text-white mb-6"
+            >
+              Офис MeridianVL{' '}
+              <span className="text-[#D4AF37] font-bold">на карте</span>
+            </motion.h2>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="rounded-2xl overflow-hidden border border-white/10"
+            >
               <iframe
                 src="https://yandex.ru/map-widget/v1/?ll=131.897767%2C43.121229&z=17&pt=131.897767,43.121229,pm2rdm"
                 width="100%"
-                height="400"
-                style={{ border: 0 }}
+                height="420"
+                style={{ border: 0, display: 'block' }}
                 title="Карта офиса МеридианVL"
                 loading="lazy"
               />
-            </div>
+            </motion.div>
           </div>
-        </div>
-      </main>
+        </section>
+      </div>
     </>
   );
 }
