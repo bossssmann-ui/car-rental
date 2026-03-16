@@ -9,6 +9,8 @@ import ContactsPage from './pages/ContactsPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import LogoShowcase from './pages/LogoShowcase';
+import ConciergePage from './pages/ConciergePage';
+import ConditionsPage from './pages/ConditionsPage';
 import './App.css';
 
 const basename = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -24,6 +26,8 @@ export default function App() {
           <Route path="/booking" element={<BookingPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contacts" element={<ContactsPage />} />
+          <Route path="/concierge" element={<ConciergePage />} />
+          <Route path="/conditions" element={<ConditionsPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/logos" element={<LogoShowcase />} />
