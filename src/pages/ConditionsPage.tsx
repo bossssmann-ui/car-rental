@@ -31,7 +31,7 @@ export default function ConditionsPage() {
   return (
     <>
       <Seo
-        title="Условия аренды — PACIFIC STAR Владивосток"
+        title="Условия аренды — Meridian VL Владивосток"
         description="Условия аренды премиальных автомобилей во Владивостоке: документы, залог, страховка, пробег."
         path="/conditions"
       />
