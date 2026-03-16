@@ -6,6 +6,7 @@ import Hero from '../components/layout/Hero';
 import FleetShowcase from '../components/sections/FleetShowcase';
 import BookingWidget from '../components/sections/BookingWidget';
 import Features from '../components/sections/Features';
+import Concierge from '../components/sections/Concierge';
 import { cars, reviews } from '../data/cars';
 
 const steps = [
@@ -69,6 +70,9 @@ export default function HomePage() {
 
       {/* Premium Features Bento Grid */}
       <Features />
+
+      {/* Concierge Service */}
+      <Concierge />
 
       {/* How it works */}
       <section className="section" id="how-it-works">
