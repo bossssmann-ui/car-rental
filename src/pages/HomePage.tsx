@@ -5,7 +5,7 @@ import Seo from '../components/Seo';
 import Hero from '../components/layout/Hero';
 import FleetShowcase from '../components/sections/FleetShowcase';
 import BookingWidget from '../components/sections/BookingWidget';
-import BentoFeatures from '../components/sections/BentoFeatures';
+import Features from '../components/sections/Features';
 import { cars, reviews } from '../data/cars';
 
 const steps = [
@@ -67,8 +67,8 @@ export default function HomePage() {
       {/* Premium Fleet Showcase */}
       <FleetShowcase cars={cars} />
 
-      {/* Premium Bento Features */}
-      <BentoFeatures />
+      {/* Premium Features Bento Grid */}
+      <Features />
 
       {/* How it works */}
       <section className="section" id="how-it-works">
