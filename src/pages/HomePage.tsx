@@ -1,43 +1,12 @@
 import { Link } from 'react-router-dom';
-import { Shield, Clock, MapPin, ThumbsUp, Award, Headphones, ChevronRight } from 'lucide-react';
-import CarCard from '../components/CarCard';
+import { ChevronRight } from 'lucide-react';
 import ReviewCard from '../components/ReviewCard';
 import Seo from '../components/Seo';
 import Hero from '../components/layout/Hero';
+import FleetShowcase from '../components/sections/FleetShowcase';
+import BookingWidget from '../components/sections/BookingWidget';
+import BentoFeatures from '../components/sections/BentoFeatures';
 import { cars, reviews } from '../data/cars';
-
-const benefits = [
-  {
-    icon: Shield,
-    title: 'Исправные и подготовленные автомобили',
-    desc: 'Каждый автомобиль проверяется перед выдачей, чтобы аренда авто во Владивостоке была безопасной и предсказуемой.',
-  },
-  {
-    icon: Clock,
-    title: 'Быстрое подтверждение брони',
-    desc: 'Онлайн-заявка помогает заранее подготовить договор и сократить время получения автомобиля.',
-  },
-  {
-    icon: MapPin,
-    title: 'Выдача в городе и в аэропорту',
-    desc: 'Можно получить машину в офисе MeridianVL, согласовать подачу в аэропорт Владивостока или доставку по городу.',
-  },
-  {
-    icon: ThumbsUp,
-    title: 'Прозрачные условия аренды',
-    desc: 'Чёткая стоимость, понятный депозит и сопровождение менеджера без лишних скрытых платежей.',
-  },
-  {
-    icon: Award,
-    title: 'Авто для туризма и бизнеса',
-    desc: 'В каталоге есть машины для деловых поездок, семейных маршрутов, трансферов и путешествий по Приморью.',
-  },
-  {
-    icon: Headphones,
-    title: 'Сервис с акцентом на клиента',
-    desc: 'Менеджеры помогают подобрать формат аренды под маршрут, багаж, пассажиров и формат вашей поездки.',
-  },
-];
 
 const steps = [
   { num: '01', title: 'Выберите класс авто', desc: 'Сравните эконом, комфорт, кроссоверы, бизнес-седаны и минивэны по цене и задачам поездки.' },
@@ -55,7 +24,6 @@ const stats = [
 
 
 export default function HomePage() {
-  const featuredCars = cars.filter((c) => c.available).slice(0, 4);
   const featuredReviews = reviews.slice(0, 3);
 
   return (
@@ -76,6 +44,10 @@ export default function HomePage() {
         }}
       />
       <Hero />
+      {/* Premium Booking Widget */}
+      <div className="bg-[#0a0a0a] pt-10 pb-4">
+        <BookingWidget />
+      </div>
       <main>
 
       {/* Stats */}
@@ -92,55 +64,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Cars */}
-      <section className="section" id="cars">
-        <div className="container">
-          <div className="section__header">
-            <div className="section__tag">Наш автопарк</div>
-            <h2 className="section__title">Популярные автомобили для аренды</h2>
-            <p className="section__desc">
-              Подберите авто под городской маршрут, поездку в аэропорт, трансфер,
-              командировку или путешествие по побережью Приморья.
-            </p>
-          </div>
-          <div className="cars-grid">
-            {featuredCars.map((car) => (
-              <CarCard key={car.id} car={car} />
-            ))}
-          </div>
-          <div className="section__action">
-            <Link to="/cars" className="btn btn--outline btn--lg">
-              Все автомобили
-              <ChevronRight size={18} />
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Premium Fleet Showcase */}
+      <FleetShowcase cars={cars} />
 
-      {/* Benefits */}
-      <section className="section section--grey" id="benefits">
-        <div className="container">
-          <div className="section__header">
-            <div className="section__tag">Наши преимущества</div>
-            <h2 className="section__title">Почему MeridianVL ищут по запросам “автопрокат Владивосток”</h2>
-            <p className="section__desc">
-              Мы делаем прокат автомобилей понятным для жителей города, туристов,
-              гостей Владивостока и корпоративных клиентов.
-            </p>
-          </div>
-          <div className="benefits-grid">
-            {benefits.map((b) => (
-              <div key={b.title} className="benefit-card">
-                <div className="benefit-card__icon">
-                  <b.icon size={28} />
-                </div>
-                <h3 className="benefit-card__title">{b.title}</h3>
-                <p className="benefit-card__desc">{b.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Premium Bento Features */}
+      <BentoFeatures />
 
       {/* How it works */}
       <section className="section" id="how-it-works">
