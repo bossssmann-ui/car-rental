@@ -23,25 +23,33 @@ src/
 
 ## Страницы
 
-| Страница     | Путь         | Описание                                    |
-|--------------|--------------|---------------------------------------------|
-| Главная      | `/`          | Hero, статистика, авто, преимущества, отзывы |
-| Каталог      | `/cars`      | Фильтрация, сортировка, карточки авто        |
-| Бронирование | `/booking`   | Форма заявки с расчётом стоимости            |
-| О компании   | `/about`     | История, команда, ценности                  |
-| Контакты     | `/contacts`  | Офисы, форма, карта                         |
+| Страница             | Путь           | Описание                                    |
+|----------------------|----------------|---------------------------------------------|
+| Главная              | `/`            | Hero, статистика, авто, преимущества, отзывы |
+| Каталог              | `/cars`        | Фильтрация, сортировка, карточки авто        |
+| Бронирование         | `/booking`     | Форма заявки с расчётом стоимости            |
+| О компании           | `/about`       | История, команда, ценности                  |
+| Контакты             | `/contacts`    | Офисы, форма, карта                         |
+| Консьерж-сервис      | `/concierge`   | Персональный подбор авто и доп. услуги       |
+| Условия аренды       | `/conditions`  | Возраст, документы, залог, страховка         |
+| Конфиденциальность   | `/privacy`     | Обработка персональных данных               |
+| Условия бронирования | `/terms`       | Правила бронирования и аренды               |
 
 ## Демо
 
 👉 **[Открыть сайт](https://bossssmann-ui.github.io/car-rental/)** — живая версия на GitHub Pages
 
-| Страница     | Прямая ссылка                                                           |
-|--------------|-------------------------------------------------------------------------|
-| Главная      | [/](https://bossssmann-ui.github.io/car-rental/)                       |
-| Каталог      | [/cars](https://bossssmann-ui.github.io/car-rental/cars)               |
-| Бронирование | [/booking](https://bossssmann-ui.github.io/car-rental/booking)         |
-| О компании   | [/about](https://bossssmann-ui.github.io/car-rental/about)             |
-| Контакты     | [/contacts](https://bossssmann-ui.github.io/car-rental/contacts)       |
+| Страница             | Прямая ссылка                                                                 |
+|----------------------|-------------------------------------------------------------------------------|
+| Главная              | [/](https://bossssmann-ui.github.io/car-rental/)                             |
+| Каталог              | [/cars](https://bossssmann-ui.github.io/car-rental/cars)                     |
+| Бронирование         | [/booking](https://bossssmann-ui.github.io/car-rental/booking)               |
+| О компании           | [/about](https://bossssmann-ui.github.io/car-rental/about)                   |
+| Контакты             | [/contacts](https://bossssmann-ui.github.io/car-rental/contacts)             |
+| Консьерж-сервис      | [/concierge](https://bossssmann-ui.github.io/car-rental/concierge)           |
+| Условия аренды       | [/conditions](https://bossssmann-ui.github.io/car-rental/conditions)         |
+| Конфиденциальность   | [/privacy](https://bossssmann-ui.github.io/car-rental/privacy)               |
+| Условия бронирования | [/terms](https://bossssmann-ui.github.io/car-rental/terms)                   |
 
 ## Запуск
 
